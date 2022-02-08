@@ -20,6 +20,8 @@ status : **solved**
 
 note : 
 
+***
+
 ### 1001. A-B
 
 problem : https://www.acmicpc.net/problem/1001
@@ -27,6 +29,8 @@ problem : https://www.acmicpc.net/problem/1001
 status : **solved**
 
 note : 
+
+***
 
 ### 1152. 단어의 개수
 
@@ -36,6 +40,8 @@ status : **solved**
 
 note : 
 
+***
+
 ### 1157. 단어 공부
 
 problem : https://www.acmicpc.net/problem/1157
@@ -43,6 +49,8 @@ problem : https://www.acmicpc.net/problem/1157
 status : **solved**
 
 note :
+
+***
 
 ### 1546. 평균
 
@@ -52,6 +60,8 @@ status : **solved**
 
 note : 
 
+***
+
 ### 2439. 별 찍기 2
 
 problem : https://www.acmicpc.net/problem/2439
@@ -59,6 +69,8 @@ problem : https://www.acmicpc.net/problem/2439
 status : **solved**
 
 note : 
+
+***
 
 ### 2475. 검증수
 
@@ -68,6 +80,8 @@ status : **solved**
 
 note : 
 
+***
+
 ### 2577. 숫자의 개수
 
 problem : https://www.acmicpc.net/problem/2577
@@ -75,6 +89,8 @@ problem : https://www.acmicpc.net/problem/2577
 status : **solved**
 
 note : 
+
+***
 
 ### 2741. N 찍기
 
@@ -90,6 +106,8 @@ code :
 ```
 
 note : 
+
+***
 
 ### 10172. 개
 
@@ -108,6 +126,8 @@ print('||_/=\\\\__|')
 
 note : 
 
+***
+
 ### 10809. 알파벳 찾기
 
 problem : https://www.acmicpc.net/problem/10809
@@ -123,6 +143,8 @@ for i in range(97, 123): ### 97 = 'a', 122 = 'z'
 ```
 
 note :
+
+***
 
 ### 10998 : A x B
 
