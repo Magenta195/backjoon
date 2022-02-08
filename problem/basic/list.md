@@ -43,4 +43,10 @@ status : **solved**
 
 note :
 
-###
+### 1546. 평균
+
+problem : https://www.acmicpc.net/problem/1546
+
+status : **solved**
+
+note : 
