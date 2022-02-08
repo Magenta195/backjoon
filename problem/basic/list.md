@@ -109,6 +109,22 @@ note :
 
 ***
 
+### 2908. 상수
+
+problem : https://www.acmicpc.net/problem/2908
+
+status : **solved**
+
+code : 
+```
+a, b = input().split()
+print(a[::-1] if int(a[::-1]) > int(b[::-1]) else b[::-1])
+```
+
+note :
+
+***
+
 ### 10172. 개
 
 problem : https://www.acmicpc.net/problem/10172
