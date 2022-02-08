@@ -50,3 +50,11 @@ problem : https://www.acmicpc.net/problem/1546
 status : **solved**
 
 note : 
+
+### 2439. 별 찍기 2
+
+problem : https://www.acmicpc.net/problem/2439
+
+status : 
+
+note : 
