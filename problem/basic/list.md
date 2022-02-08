@@ -34,3 +34,13 @@ problem : https://www.acmicpc.net/problem/1152
 status : **solved**
 
 note : 
+
+### 1157. 단어 공부
+
+problem : https://www.acmicpc.net/problem/1157
+
+status : **solved**
+
+note :
+
+###
