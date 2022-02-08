@@ -66,3 +66,11 @@ problem : https://www.acmicpc.net/problem/2475
 status : **solved**
 
 note : 
+
+### 2577. 숫자의 개수
+
+problem : https://www.acmicpc.net/problem/2577
+
+status : **solved**
+
+note : 
