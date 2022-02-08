@@ -55,6 +55,14 @@ note :
 
 problem : https://www.acmicpc.net/problem/2439
 
-status : 
+status : **solved**
+
+note : 
+
+### 2475. 검증수
+
+problem : https://www.acmicpc.net/problem/2475
+
+status : **solved**
 
 note : 
