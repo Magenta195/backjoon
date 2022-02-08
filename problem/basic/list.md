@@ -11,7 +11,7 @@
 
 ---
 
-#### 1000. A+B
+### 1000. A+B
 
 problem : https://www.acmicpc.net/problem/1000
 
@@ -19,7 +19,7 @@ status : **solved**
 
 note : 
 
-#### 1001. A-B
+### 1001. A-B
 
 problem : https://www.acmicpc.net/problem/1001
 
@@ -27,3 +27,10 @@ status : **solved**
 
 note : 
 
+### 1152. 단어의 개수
+
+problem : https://www.acmicpc.net/problem/1152
+
+status : **solved**
+
+note : 
