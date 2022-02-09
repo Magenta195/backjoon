@@ -162,7 +162,7 @@ note :
 
 ***
 
-### 10998 : A x B
+### 10998. A x B
 
 problem : https://www.acmicpc.net/problem/10998
 
@@ -172,6 +172,105 @@ code :
 ```
 a, b = map(int, input().split())
 print(a*b)
+```
+
+note :
+
+***
+
+### 4153. 직각삼각형
+
+problem : https://www.acmicpc.net/problem/4153
+
+status : **solved**
+
+code :
+
+```
+import sys
+
+while(True):
+    i = sorted([ x for x in map(int, sys.stdin.readline().split())])
+    if i[0] == 0 : break
+    if i[2] ** 2 == i[1] ** 2 + i[0] ** 2 : print('right')
+    else : print('wrong')
+```
+
+note :
+
+***
+
+### 10240. ACM 호텔
+
+problem : https://www.acmicpc.net/problem/10250
+
+status : **solved**
+
+code :
+```
+import sys
+
+m = int(sys.stdin.readline())
+
+for _ in range(m):
+    h, w, n = map(int, sys.stdin.readline().split())
+    nw = n // h if n % h != 0 else n // h - 1
+    nh = n % h if n % h != 0 else h
+    print(100 * nh + (nw + 1))
+
+```
+
+note:
+
+***
+
+### 10816. 숫자 카드 2
+
+problem : https://www.acmicpc.net/problem/10816
+
+status : **solved**
+
+code :
+```
+import sys
+
+def sort_func(lst) : ### quicksort
+    if len(lst) <= 1 : return lst
+
+    m = lst[0]
+    l_lst = list()
+    m_lst = list()
+    r_lst = list()
+    
+    for i in lst :
+      if i > m : r_lst.append(i)
+      elif i == m : m_lst.append(i)
+      else : l_lst.append(i)
+    
+    return sort_func(l_lst) + m_lst + sort_func(r_lst)
+
+n = int(sys.stdin.readline())
+n_card = [x for x in map(int, sys.stdin.readline().split())]
+n_card = sort_func(n_card)
+n_dic = {}
+
+m = int(sys.stdin.readline())
+m_card = [x for x in map(int, sys.stdin.readline().split())]
+
+
+for i in range(n) :
+    n_i = n_card[i]
+    if n_i not in n_dic :
+        idx = i
+        cnt = 0
+        while idx < n :
+            if n_i != n_card[idx] : break
+            idx += 1
+            cnt += 1
+        n_dic[n_i] = cnt
+        
+for i in m_card :
+    print(n_dic[i] if i in n_dic else 0, end=' ')
 ```
 
 note :
