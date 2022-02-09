@@ -274,7 +274,54 @@ for i in m_card :
 ```
 
 note :
+* 두 가지 풀이법이 있습니다. 하나는 먼저 card를 sort하고, sort한 list를 토대로 그 value를 미리 세어 놓기.
+* 그리고 다른 하나는 sort를 진행하지 않고 binary search를 하는 방법입니다.
+* 다만 2 방법 모두 n_card에 대한 unique value를 먼저 계산하는 것이 좋습니다. 그렇지 않으면 시간초과가 뜨기 쉬워보입니다.... 반성중.
 
 ***
 
-### 11050. 
+### 11050. 이항 계수 1
+
+problem : https://www.acmicpc.net/problem/11050
+
+status : **solved**
+
+code :
+```
+import sys
+
+n, k = map(int, sys.stdin.readline().split())
+p = 1
+
+for i in range(1, k+1) :
+    p = p * (n - i + 1) // i
+print(p)
+```
+
+note : 
+* 매우 간단한 수학 문제.
+
+***
+
+### 11866. 요세푸스 문제 0
+
+problem : https://www.acmicpc.net/problem/11866
+
+status : 
+
+code :
+```
+import sys
+
+n, k = map(int, sys.stdin.readline().split())
+queue = list(range(1, n+1))
+
+print('<', end='')
+while len(queue) > 1 :
+    for _ in range(k-1) : 
+        queue.append(queue.pop(0))
+    print(queue.pop(0), end=', ')
+print(queue.pop(0),'>',sep='')
+```
+
+note : 요제푸스 순열 = 큐....왜 이게 바로바로 생각이 안났지
