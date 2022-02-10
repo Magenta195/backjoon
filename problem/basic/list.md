@@ -442,3 +442,55 @@ note :
 * 사실 기본 알고리즘 구성은 빠르게 끝났지만, input을 한번에 받아 구성하는 code 작성 시 typeerror가 자꾸 반복된다.
 * 하지만 전체적인 알고리즘을 그대로 두고 input을 그때그때 받아오게 되는 위 코드로 변경시 정답으로 인정되었다.
 * 도대체 무엇이 문제였는지... 아직도 배울 점이 많아 보인다.
+
+***
+
+### 1929. 소수 구하기
+
+problem : https://www.acmicpc.net/problem/1929
+
+status:
+
+code :
+* trial 1
+```
+import math
+
+a, b = map(int, input().split())
+for i in range(a, b+1):
+    if i == 1 : continue
+    chk = True
+    for j in range(2, math.floor(math.sqrt(i))+1):
+        if i % j == 0 :
+            chk = False
+            break
+    if chk : print(i)
+```
+memory : 126332 kb, time : 948 ms (pypy3)
+
+* trial 2
+```
+a, b = map(int, input().split())
+lst = list(range(0, b+1))
+lst[0] = 0
+lst[1] = 0
+
+cur = 0
+
+while cur < b:
+    if lst[cur] != 0 :
+        n = lst[cur]*2
+        while n <= b :
+            if lst[n] != 0 :
+                lst[n] = 0
+            n += lst[cur]
+    cur += 1
+
+for x in lst :
+    if x != 0 and x >= a : print(x)
+```
+memory : 133176 kb, time : 172 ms (pypy3)
+
+note :
+* trial 1은 처음에 실패할 것을 예상하고 풀이했는데 의외로 맞아서 놀랐다. 위 코드의 경우 일일히 숫자 하나씩을 풀기 때문에, 각종 편법들(루트값까지만 계산하기, 도중에 소수가 아니라고 판명되면 그만두기, 1은 통과시키기)을 동원하고도 시간 초과가 뜰 줄 알았다. 맞았으니 그냥 넘어갈 수 도 있겠지만 두 번째 방법을 시도해보기로 하였다.
+* 아마 trial 2가 모범답안으로 예상된다. trial 2는 에라스토테네스의 체 기법을 이용했다. 실제로도 훨씬 time이 줄어든 것을 확인할 수 있다. 시간복잡도가 위에 비해 매우 낮기 때문이다(중복되는 수는 계산에서 제외한다). 아마 소수를 다루는 문제에서는 2의 계산법이 좀 더 효율적이라 예상한다.
