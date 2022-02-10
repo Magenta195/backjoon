@@ -493,4 +493,34 @@ memory : 133176 kb, time : 172 ms (pypy3)
 
 note :
 * trial 1은 처음에 실패할 것을 예상하고 풀이했는데 의외로 맞아서 놀랐다. 위 코드의 경우 일일히 숫자 하나씩을 풀기 때문에, 각종 편법들(루트값까지만 계산하기, 도중에 소수가 아니라고 판명되면 그만두기, 1은 통과시키기)을 동원하고도 시간 초과가 뜰 줄 알았다. 맞았으니 그냥 넘어갈 수 도 있겠지만 두 번째 방법을 시도해보기로 하였다.
-* 아마 trial 2가 모범답안으로 예상된다. trial 2는 에라스토테네스의 체 기법을 이용했다. 실제로도 훨씬 time이 줄어든 것을 확인할 수 있다. 시간복잡도가 위에 비해 매우 낮기 때문이다(중복되는 수는 계산에서 제외한다). 아마 소수를 다루는 문제에서는 2의 계산법이 좀 더 효율적이라 예상한다.
+* 아마 trial 2가 모범답안으로 예상된다. trial 2는 에라스토테네스의 체 기법을 이용했다. 실제로도 훨씬 time이 줄어든 것을 확인할 수 있다. 시간복잡도가 위에 비해 매우 낮기 때문이다.  인 반면 (중복되는 수는 계산에서 제외한다). 위는 O(N^(3/2)), 아래는 O(NloglogN)의 복잡도를 가진다(출처 : 위키피디아) 소수를 다루는 문제에서는 2의 계산법이 좀 더 효율적이라 예상한다.
+
+***
+
+### 1966. 프린터 큐
+
+problem : https://www.acmicpc.net/problem/1966
+
+status :
+
+code :
+
+```
+import sys
+
+l = int(input())
+
+for _ in range(l) :
+    n, m = map(int, sys.stdin.readline().split())
+    n_lst = [(i, x) for i, x in enumerate(map(int, sys.stdin.readline().split()))]
+    cnt = 0
+    max_prt = 0
+    
+    while n_lst:
+        idx, prt = n_lst.pop(0)
+        
+        if n_lst :
+            for i in n_lst :
+            if prt   
+    
+```
