@@ -307,7 +307,7 @@ note :
 
 problem : https://www.acmicpc.net/problem/11866
 
-status : 
+status : **solved**
 
 code :
 ```
@@ -325,3 +325,74 @@ print(queue.pop(0),'>',sep='')
 ```
 
 note : 요제푸스 순열 = 큐....왜 이게 바로바로 생각이 안났지
+
+***
+
+### 1436. 영화감독 숌
+
+problem : https://www.acmicpc.net/problem/1436
+
+status : **solved**
+
+code : 
+```
+n = int(input())
+
+i = 0
+num = 666
+
+while True:
+    tmp = num
+    while tmp >= 666 :
+        if tmp % 1000 == 666 :
+            i += 1
+            break
+        else :
+            tmp = tmp // 10
+    
+    if i == n : break
+    num += 1
+
+print(num)
+```
+
+note :
+* brute force 문제. 일차원적인 접근부터 생각해볼것.
+
+***
+
+### 1654. 랜선 자르기
+
+problem : https://www.acmicpc.net/problem/1654
+
+status : **solved**
+
+code :
+```
+import sys
+
+k, n = map(int, sys.stdin.readline().split())
+k_lst = [int(sys.stdin.readline()) for _ in range(k)]
+
+max_k = max(k_lst)
+
+def search(start, end, lst, n):
+    mid = (start + end) // 2
+    if start > end : 
+        return end
+    cnt = sum([x//mid for x in k_lst])
+    
+    if cnt >= n :        
+        return search(mid+1, end, lst, n)
+    else :
+        return search(start, mid-1, lst, n)
+
+
+print(search(1, max_k, k_lst, n))
+```
+
+note : 
+* 이분 탐색 및 매개탐색 문제.
+* 난이도 하. 그런데 시간이 예상보다 오래 걸림. 익숙해질 필요 있음.
+* zerodivisionerror는 생각도 못했는데... start를 1로 해야 함
+  * 반례 : [0,1]일때 mid = (0 + 1) // 2 = 0. zero division 
