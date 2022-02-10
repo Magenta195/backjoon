@@ -396,3 +396,49 @@ note :
 * 난이도 하. 그런데 시간이 예상보다 오래 걸림. 익숙해질 필요 있음.
 * zerodivisionerror는 생각도 못했는데... start를 1로 해야 함
   * 반례 : [0,1]일때 mid = (0 + 1) // 2 = 0. zero division 
+
+***
+
+### 1874. 스택 수열
+
+problem : https://www.acmicpc.net/problem/1874
+
+status : **solved**
+
+code :
+```
+import sys
+
+n = int(sys.stdin.readline())
+r = 1
+chk = False
+
+stk = []
+pm = []
+
+for i in range(n) :
+    num = int(sys.stdin.readline())
+    while r <= num :
+        stk.append(r)
+        r += 1
+        pm.append('+')
+
+    if stk[-1] == num :
+        stk.pop()
+        pm.append('-')
+ 
+    else :
+        chk = True
+        break
+
+if chk :
+    print('NO')
+else :
+    for x in pm : print(x)
+
+```
+note :
+* 오늘 문제 중에 제일 헤맸다. 
+* 사실 기본 알고리즘 구성은 빠르게 끝났지만, input을 한번에 받아 구성하는 code 작성 시 typeerror가 자꾸 반복된다.
+* 하지만 전체적인 알고리즘을 그대로 두고 input을 그때그때 받아오게 되는 위 코드로 변경시 정답으로 인정되었다.
+* 도대체 무엇이 문제였는지... 아직도 배울 점이 많아 보인다.
