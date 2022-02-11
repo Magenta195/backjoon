@@ -626,7 +626,7 @@ note :
 
 problem : https://www.acmicpc.net/problem/2775
 
-status : 
+status : **solved**
 
 code :
 ```
@@ -645,4 +645,107 @@ note : 간단한 문제라 알고리즘을 구하지 않고 조건을 따라가�
 
 ***
 
-###
+### 2839. 설탕 배달
+
+problem : https://www.acmicpc.net/problem/2839
+
+status : **solved**
+
+code :
+```
+
+n = int(input())
+flg = True
+for i in range(n // 5, -1, -1):
+    if (n - 5*i) % 3 == 0:
+        flg = False
+        print(i + (n - 5*i) // 3)
+        break
+if flg : print(-1)
+
+```
+note :
+
+***
+
+### 2869. 달팽이는 올라가고 싶다
+
+problem : https://www.acmicpc.net/problem/2869
+
+status : **solved**
+
+code :
+```
+import math
+
+a, b, v = map(int, input().split())
+print( math.ceil((v - a) / (a - b)) + 1)
+```
+
+note :
+* 기본 수학 문제. 브루트포스는 극단적인 케이스에서 시간 초과를 일으킬 가능성이 높다.
+
+***
+
+### 4949. 균형잡힌 세상
+
+problem : https://www.acmicpc.net/problem/4949
+
+status : **solved**
+
+code :
+```
+import sys
+
+while True:
+    s = sys.stdin.readline()
+    if s[0] == '.' and len(s) == 2: break
+    stk = []
+    flg = False
+    
+    for i in s :
+        if i == '.' : break
+        if i == '(' or i == '[' :
+            stk.append(i)
+        elif i == ')' or i == ']':
+            if not stk :
+                flg = True
+                break
+            if ((stk[-1] == '[' and i ==']') or
+                (stk[-1] == '(' and i ==')')) :
+                stk.pop()
+            else :
+                flg = True
+                break
+    if stk : flg = True 
+
+    print('no' if flg else 'yes')
+```
+
+note : 
+
+*** 
+
+### 7568.덩치
+
+problem : https://www.acmicpc.net/problem/7568
+
+status : **solved**
+
+code :
+```
+n = int(input())
+lst = [[x for x in map(int, input().split())] for _ in range(n)]
+s = [1] * n
+
+for i in range(n):
+    for j in lst:
+        if lst[i][0] < j[0] and lst[i][1] < j[1] :
+            s[i] += 1
+print(*s)
+```
+
+note :
+* 문제를 가끔씩은 쉽게 생각해보자.
+    
+   
