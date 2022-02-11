@@ -501,7 +501,7 @@ note :
 
 problem : https://www.acmicpc.net/problem/1966
 
-status :
+status : **solved**
 
 code :
 
@@ -512,15 +512,137 @@ l = int(input())
 
 for _ in range(l) :
     n, m = map(int, sys.stdin.readline().split())
-    n_lst = [(i, x) for i, x in enumerate(map(int, sys.stdin.readline().split()))]
+    raw_lst = [x for x in map(int, sys.stdin.readline().split())]
+    prt_lst = sorted(raw_lst, reverse=True)
+    n_lst = [(i, x) for i, x in enumerate(raw_lst)]
+    
     cnt = 0
-    max_prt = 0
     
     while n_lst:
-        idx, prt = n_lst.pop(0)
-        
-        if n_lst :
-            for i in n_lst :
-            if prt   
-    
+        idx, prt = n_lst[0]
+        if prt >= prt_lst[0] :
+            cnt += 1
+            prt_lst.pop(0)
+            n_lst.pop(0)
+            if idx == m : break
+        else :
+            n_lst.append(n_lst.pop(0))
+
+    print(cnt)
 ```
+note :
+* 프라이어티를 따로 sort해서 저장하면 풀이가 쉽습니다.
+
+***
+
+### 2108. 통계학
+
+problem : https://www.acmicpc.net/problem/2108
+
+status : **solved**
+
+code : 
+```
+from collections import Counter
+import sys
+
+def most_frequent(lst):
+    cnt = sorted(Counter(lst).items(), key=lambda x:(-x[1], x[0]))
+
+    if len(cnt) > 1 :
+        if cnt[1][1] == cnt[0][1] :
+            return cnt[1][0]
+
+    return cnt[0][0]
+
+n = int(input())
+lst = [x for x in map(int, sys.stdin.readlines())]
+s_lst = sorted(lst)
+
+print(round(sum(lst)/n))
+print(s_lst[n//2])
+print(most_frequent(lst))
+print(s_lst[-1] - s_lst[0])
+```
+
+note :
+ * attribute error때문에 당황. readlines 에 split method 를 붙여서 벌어진 일.
+ * 최빈값이 핵심. 따로 함수를 구현해줘야 했다.
+
+***
+
+### 2231. 분해합
+
+problem : https://www.acmicpc.net/problem/2231
+
+status : **solved**
+
+code :
+```
+n = int(input())
+l = len(str(n))
+ctr = True
+
+for i in range(max(1, n - 9*l), n) :
+    j = sum([x for x in map(int, str(i))]) + i
+    if j == n :
+        ctr = False
+        print(i)
+        break
+        
+    
+if ctr : print(0)
+
+```
+note : 
+* 브루트포스로 풀 수도 있겠지만, 범위 제한이 가능하다. 분해합을 할 때 더해지는 최댓값은 (자릿수) * 9가 되므로, 탐색범위를 크게 제한할 수 있다.
+
+***
+
+### 2292. 벌집
+
+problem : https://www.acmicpc.net/problem/2292
+
+status : **solved**
+
+code : 
+```
+n = int(input())
+i = 0
+while True:
+    j = 1 + sum([_ for _ in range(1, i+1)]) * 6
+    if j >= n :
+        print(i+1)
+        break
+    i += 1
+```
+
+note :
+* 편의상 list를 만들고 그 합을 구하는 식을 썼는데, 그냥 변수 몇 개를 가지고도 풀 수 있을듯.
+
+***
+
+### 2775. 부녀회장이 될테야
+
+problem : https://www.acmicpc.net/problem/2775
+
+status : 
+
+code :
+```
+i = int(input())
+for _ in range(i):
+    k = int(input())
+    n = int(input())
+    lst = [[0]*n for _ in range(k)]
+    lst[0] = list(range(1, n+1))
+    for j in range(1, k):
+        for l in range(n):
+            lst[j][l] = sum(lst[j-1][:l+1])
+    print(sum(lst[-1]))
+```
+note : 간단한 문제라 알고리즘을 구하지 않고 조건을 따라가서 풀음.
+
+***
+
+###
