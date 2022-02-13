@@ -748,4 +748,196 @@ print(*s)
 note :
 * 문제를 가끔씩은 쉽게 생각해보자.
     
-   
+***
+
+### 10773. 제로
+
+problem : https://www.acmicpc.net/problem/10773
+
+status : **solved**
+
+code :
+```
+n = int(input())
+stk = []
+for _ in range(n):
+    i = int(input())
+    if i == 0 : stk.pop()
+    else : stk.append(i)
+print(sum(stk))
+```
+note : 
+* 기본 스택 문제
+
+***
+
+### 10989. 수 정렬하기
+
+problem : https://www.acmicpc.net/problem/10989
+
+status : **solved**
+
+code:
+* trial 1 
+```
+import sys
+
+def qsort(lst) :
+    if len(lst) <= 1 : return lst
+    l_lst = []
+    r_lst = []
+    m = lst[0]
+    
+    for x in lst[1:]:
+        if x < m :
+            l_lst.append(x)
+        else :
+            r_lst.append(x)
+    
+    return qsort(l_lst) + [m] + qsort(r_lst)
+    
+n = int(input())
+lst = [x for x in map(int, sys.stdin.readlines())]
+print(*qsort(lst), sep='\n')
+```
+메모리 초과
+
+* trial 2
+```
+import sys
+
+n = int(sys.stdin.readline())
+lst = []
+for _ in range(n):
+    i = int(sys.stdin.readline())
+    if not lst : lst.append(i)
+    else :
+        for j in range(len(lst)):
+            if i <= lst[j] :
+                lst.insert(j, i)
+                break
+            if j == len(lst) - 1:
+                lst.append(i)
+print(*lst, sep='\n')
+```
+시간 초과
+
+* trial 3 :
+```
+import sys
+
+n = int(sys.stdin.readline())
+lst = [0] * (10001)
+
+for _ in range(n):
+    i = int(sys.stdin.readline())
+    lst[i] += 1
+    
+for i in range(10001) :
+    if lst[i] > 0:
+        for _ in range(lst[i]):
+            print(i)
+```
+memory : 30860 kb, time : 9712
+
+note :
+* 극단적으로 시간과 메모리가 제약된 상황. 데이터를 저장하지 않고 count할 때 사용하는 것이 관건이었다.
+
+***
+
+### 11651. 좌표
+
+problem : https://www.acmicpc.net/problem/11651
+
+status : **solved**
+
+code :
+```
+import sys
+
+n = int(input())
+lst = [[ x for x in map(int, sys.stdin.readline().split())] for _ in range(n)]
+lst.sort(key = lambda x : (x[1], x[0]))
+
+for i in lst :
+    print(i[0], i[1])
+```
+
+note :
+
+***
+
+### 15829 : Hashing
+
+problem : https://www.acmicpc.net/problem/15829
+
+status : **solved**
+
+code :
+
+```
+l = int(input())
+s = input()
+
+h = 0
+for i in range(l) :
+    h += ( ord(s[i]) - ord('a') + 1 ) * (31 ** i)
+h = h % 1234567891
+
+print(h)
+```
+
+note :
+
+***
+
+### 18111. 마인크래프트
+
+problem : https://www.acmicpc.net/problem/18111
+
+status : **solved**
+
+code :
+```
+import sys
+
+n, m, b = map(int, input().split())
+lst = [[x for x in map(int, input().split())] for _ in range(n)]
+start = min(map(min, lst))
+end = max(map(max, lst))
+s_lst = sum(map(sum, lst))
+t, h = sys.maxsize, -1
+
+def bsearch(start, end, r):
+    if start > end:
+        return r
+
+    mid = (start + end) // 2
+    cnt = 0
+
+    if s_lst - n * m * mid + b < 0 :
+        return bsearch(start, mid-1, r)
+
+    else :
+        for i in lst:
+            for j in i:
+                if j > mid :
+                    cnt += (j - mid) * 2
+                elif j < mid :
+                    cnt += mid - j
+        if cnt < r[0] or (cnt == r[0] and mid > r[1]) :
+            r = (cnt, mid)
+        l_r = bsearch(start, mid-1, r)
+        r_r = bsearch(mid+1, end, r)
+
+        return r_r if r_r[0] < l_r[0] or (r_r[0] == l_r[0] and r_r[1] > l_r[1]) else l_r
+    
+result = bsearch(start, end, (t,h))
+
+print(result[0], result[1])
+```
+
+note :
+* 조건이 있는 binary search로도 풀 수 있고, 브루트 포스로도 풀 수 있다. 전자로 풀이하였으나 조건이 명확(0 < height < 256) 하기에 후자로도 접근 가능하다.
+
+***
