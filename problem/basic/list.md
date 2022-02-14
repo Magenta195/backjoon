@@ -1106,7 +1106,7 @@ code :
 import sys
 
 n = int(sys.stdin.readline())
-m = [[x for x in map(int, sys.stdin.readline())] for _ in range(n)]
+m = [[x for x in map(int, sys.stdin.readline().split())] for _ in range(n)]
 r = [0]*3
 
 def check(lst):
@@ -1119,21 +1119,92 @@ def check(lst):
 
 def div_con(lst, num):
     if num == 1:
-        r[lst[0][0]] += 1
+        r[lst[0][0] + 1] += 1
         return
         
     if check(lst):
-        r[lst[0][0]] += 1
+        r[lst[0][0] + 1] += 1
         return 
     else :
         n_num = num // 3
         for i in range(3):
             for j in range(3):
-                div_con(lst[n_num*i:n_num*(i+1)][n_num*j:n_num*(j+1)], n_num)
+                n_lst = [row[n_num*j:n_num*(j+1)] for row in lst[n_num*i:n_num*(i+1)]]
+                div_con(n_lst, n_num)
+        return
 
 div_con(m, n)
-print(*r)
-
+print(*r, sep='\n')
 ```
 note :
 * 분할정복, 재귀의 기본 문제격. 조금 해멨던 나 자신에게 반성하자...
+
+***
+
+### 1992. 쿼드트리
+
+problem : https://www.acmicpc.net/problem/1992
+
+status : **solved**
+
+code :
+```
+import sys
+
+n = int(sys.stdin.readline())
+m = [[x for x in map(int, sys.stdin.readline().strip())] for _ in range(n)]
+
+def div_con(lst, num):
+    if num <= 1 :
+        return str(lst[0][0])
+    
+    chk = sum(map(sum, lst))
+    if chk ==  0 or chk == num ** 2 :
+        return str(lst[0][0])
+    else :
+        n_num = num // 2
+        tmp = '('
+        for i in range(2):
+            for j in range(2):
+                tmp += div_con([row[n_num*j:n_num*(j+1)] for row in lst[n_num*i:n_num*(i+1)]], n_num)
+        return tmp + ')'
+
+print(div_con(m, n))
+```
+note :
+*  바로 위 문제와 동일 풀이법.
+
+*** 
+
+### 2178. 미로 탐색
+
+problem : https://www.acmicpc.net/problem/2178
+
+status : **solved**
+
+code :
+```
+import sys
+n, m = map(int, sys.stdin.readline().split())
+v = [[0]*m for _ in range(n)]
+e = [[x for x in map(int, sys.stdin.readline().strip())] for _ in range(n)]
+
+q = [(0,0,1)]
+while q :
+  x, y, d = q.pop(0)
+  if v[y][x] > 0 : continue
+  elif y == n-1 and x == m-1 :
+      print(d)
+      break
+  v[y][x] += 1
+  for dx, dy in [(1,0), (-1,0), (0,1), (0,-1)]:
+      if x+dx < 0 or x+dx > m-1 or y+dy < 0 or y+dy > n-1 : continue
+      elif e[y+dy][x+dx] == 0 : continue
+      q.append((x+dx, y+dy, d+1))
+
+```
+
+note :
+* BFS 문제의 일종.
+
+***
