@@ -941,3 +941,199 @@ note :
 * 조건이 있는 binary search로도 풀 수 있고, 브루트 포스로도 풀 수 있다. 전자로 풀이하였으나 조건이 명확(0 < height < 256) 하기에 후자로도 접근 가능하다.
 
 ***
+
+### 1260. DFS와 BFS
+
+problem : https://www.acmicpc.net/problem/1260
+
+status : **solved**
+
+code :
+```
+import sys
+
+n, m, f = map(int, sys.stdin.readline().split())
+e = [[0]*n for _ in range(n)]
+v = [0]*n
+e_b = [[0]*n for _ in range(n)]
+v_b = [0]*n
+for _ in range(m):
+    x, y = map(int, sys.stdin.readline().split())
+    e[x-1][y-1] += 1
+    e[y-1][x-1] += 1
+    e_b[x-1][y-1] += 1
+    e_b[y-1][x-1] += 1
+
+s = [f-1]
+q = [f-1]
+    
+while s:    ### DFS
+    i = s.pop()
+    if v[i] > 0 : continue
+    v[i] += 1
+    print(i+1, end=' ')
+    for j in reversed(range(n)) :
+        if e[i][j] > 0 :
+            while e[i][j] > 0 :
+                s.append(j)
+                e[i][j] -= 1
+                e[j][i] -= 1
+print('')
+
+while q:    ### BFS
+    i = q.pop(0)
+    if v_b[i] > 0 : continue
+    v_b[i] += 1
+    print(i+1, end=' ')
+    for j in range(n) :
+        if e_b[i][j] > 0 :
+            while e_b[i][j] > 0 :
+                q.append(j)
+                e_b[i][j] -= 1
+                e_b[j][i] -= 1
+    
+```
+
+note :
+* BFS, DFS 개념 체크. BFS는 큐, DFS는 스택을 이용한다는 점을 기억해두자.
+
+***
+
+### 1389. 케빈 베이컨의 6단계 법칙
+
+problem : https://www.acmicpc.net/problem/1389
+
+status : **solved**
+
+code :
+```
+import sys
+
+n, m = map(int, sys.stdin.readline().split())
+e = [[1e7]*n for _ in range(n)]
+for _ in range(m) : 
+    x, y = map(int, sys.stdin.readline().split())
+    e[x-1][y-1] = min(1, e[x-1][y-1])
+    e[y-1][x-1] = e[x-1][y-1]
+
+for k in range(n):
+    for i in range(n):
+        for j in range(n):
+            if e[i][k] + e[k][j] < e[i][j] :
+                e[i][j] = e[i][k] + e[k][j]
+
+min_value = 1e7
+
+for i in range(n) :
+    if min_value > sum(e[i]) :
+        min_value = sum(e[i])
+        min_idx = i
+
+print(min_idx+1)
+
+```
+
+note :
+* 플로이드 와샬 알고리즘의 좋은 예제.
+
+***
+
+### 1541. 잃어버린 괄호
+
+problem : https://www.acmicpc.net/problem/1541
+
+status : **solved**
+
+code : 
+```
+import re
+s = input()
+
+m = map(int, re.split('[^0-9]', s))
+n = re.findall('[^0-9]', s)
+t = m.pop(0)
+
+for i in n :
+  if i == '-' :
+      t -= sum(m)
+      break
+  t += m.pop(0)
+
+print(t)
+```
+
+note :
+* 알고리즘 분류에 그리디 알고리즘이 포함되어 있었는데, 글쎄...
+
+***
+
+### 1676. 팩토리얼 0의 개수
+
+problem : https://www.acmicpc.net/problem/1676
+
+status : **solved**
+
+code :
+```
+n = int(input())
+t, f = 0, 0
+
+for i in range(1, n+1):
+    while i > 1: 
+        if i % 2 == 0:
+            t += 1
+            i /= 2
+        elif i % 5 == 0:
+            f += 1
+            i /= 5
+        else : 
+            break
+print(min(t, f))
+```
+
+note :
+
+***
+
+### 1780. 종이의 개수
+
+problem : https://www.acmicpc.net/problem/1780
+
+status : **solved**
+
+code :
+```
+import sys
+
+n = int(sys.stdin.readline())
+m = [[x for x in map(int, sys.stdin.readline())] for _ in range(n)]
+r = [0]*3
+
+def check(lst):
+    start = lst[0][0]
+    for i in lst:
+        for j in i:
+            if start != j :
+                return False
+    return True
+
+def div_con(lst, num):
+    if num == 1:
+        r[lst[0][0]] += 1
+        return
+        
+    if check(lst):
+        r[lst[0][0]] += 1
+        return 
+    else :
+        n_num = num // 3
+        for i in range(3):
+            for j in range(3):
+                div_con(lst[n_num*i:n_num*(i+1)][n_num*j:n_num*(j+1)], n_num)
+
+div_con(m, n)
+print(*r)
+
+```
+note :
+* 분할정복, 재귀의 기본 문제격. 조금 해멨던 나 자신에게 반성하자...
