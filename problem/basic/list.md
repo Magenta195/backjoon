@@ -1208,3 +1208,66 @@ note :
 * BFS 문제의 일종.
 
 ***
+
+### 2579. 계단 오르기
+
+problem : https://www.acmicpc.net/problem/2579
+
+status : **solved**
+
+code :
+* trial 1 ( Non-DynamicProgramming )
+```
+import sys
+
+n = int(sys.stdin.readline())
+m = [0] + [x for x in map(int, sys.stdin.readlines())]
+
+def gsearch(p, cnt):
+    if p == n :
+        return m[p]
+    elif p == n-1 :
+        return m[p] + gsearch(p+1, cnt+1) if cnt == 1 else -1
+    else :
+        if cnt == 1:
+            return m[p] + gsearch(p+2, 0)
+        else :
+            return m[p] + max(gsearch(p+1, cnt+1), gsearch(p+2, 0))
+
+print(gsearch(0, 0))
+    
+```
+* trial 2(Dynamic Programming)
+```
+import sys
+
+n = int(sys.stdin.readline())
+m = [x for x in map(int, sys.stdin.readlines())]
+m_lst = [[] for _ in range(n)]
+
+for i in range(n):
+    if i == 0:
+        m_lst[i].append((m[i], 0))
+    elif i == 1:
+        m_lst[i].append((m[i], 0))
+        m_lst[i].append((m[i]+m[i-1], 1))
+    else :
+        for lst in m_lst[i-1] :
+            if lst[1] == 1 : continue
+            m_lst[i].append((lst[0] + m[i], 1))
+        val = -1
+        for lst in m_lst[i-2] :
+            val = max(lst[0], val)
+        m_lst[i].append((val + m[i], 0))
+
+val = -1
+for lst in m_lst[-1]:
+    val = max(lst[0], val)
+print(val)
+    
+```
+
+note :
+* 기본적인 DP 문제. 단순히 분할정복으로 풀게 되면 메모리 문제가 발생한다.
+
+***
