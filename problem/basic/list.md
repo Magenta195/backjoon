@@ -1271,3 +1271,192 @@ note :
 * 기본적인 DP 문제. 단순히 분할정복으로 풀게 되면 메모리 문제가 발생한다.
 
 ***
+
+### 2667. 단지번호붙이기
+
+problem : https://www.acmicpc.net/problem/2667
+
+status : **solved**
+
+code :
+```
+import sys
+
+n = int(sys.stdin.readline())
+m = [[x for x in map(int, sys.stdin.readline().strip())] for _ in range(n)]
+v = [[0]*n for _ in range(n)]
+c_lst = []
+
+for y in range(n) :
+    for x in range(n) :
+        if m[y][x] == 1 and v[y][x] == 0 :
+            q = [(x, y)]
+            cnt = 0
+            while q:
+                ax, ay = q.pop(0)
+                if v[ay][ax] > 0 : continue
+                v[ay][ax] += 1
+                cnt += 1
+                for dx, dy in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
+                    if ax + dx < 0 or ax + dx > n-1 or ay + dy < 0 or ay + dy > n-1 :
+                        continue
+                    if m[ay+dy][ax+dx] == 0 :
+                        continue
+                    q.append((ax+dx, ay+dy))
+            c_lst.append(cnt)
+print(len(c_lst), *sorted(c_lst), sep='\n')
+```
+
+note :
+* 문제 자체가 어려웠다기보다는 자잘한 실수가 많았던 문제.
+
+***
+
+### 5525. IOIOI
+
+problem : https://www.acmicpc.net/problem/5525
+
+status : **solved**
+
+code :
+* trial 1
+```
+n = int(input())
+m = int(input())
+s = input()
+p = 'I' + 'OI'*n
+cnt = 0
+
+for i in range(m - 2*n):
+    if s[i:i+2*n+1] == p : cnt += 1
+print(cnt)
+```
+부분 성공(subtask 2 시간 초과)
+
+* trial 2
+```
+n = int(input())
+m = int(input())
+s = input()
+cnt = 0
+pnt = 0
+
+while pnt < m - 2*n :
+    if s[pnt] == 'I':
+        t_cnt = 0
+        pnt += 1
+        while pnt <= m - 2:
+            if s[pnt:pnt+2] == 'OI' :
+                t_cnt += 1
+                pnt += 2
+            else :
+                break
+        if t_cnt >= n :
+            cnt += t_cnt-n+1
+    else :
+        pnt += 1
+print(cnt)
+```
+성공
+
+note :
+* 단순히 문자열을 차례대로 비교하게 되면 중복하여 정보를 읽어들이므로, 이미 읽은 정보는 최대한 배제하는 탐색 기법을 생각해보아야 한다.
+
+***
+
+### 6064. 카잉 달력
+
+problem : https://www.acmicpc.net/problem/6064
+
+status : **solved**
+
+code :
+* trial 1
+```
+import sys
+t = int(sys.stdin.readline())
+for _ in range(t):
+    m, n, x, y = map(int, sys.stdin.readline().split())
+    flg = True
+    for k in range(1, m*n+1):
+        if k % m == x % m and k % n == y % n:
+            print(k)
+            flg = False
+            break
+    if flg : print(-1)
+```
+시간 초과
+
+* trial 2
+```
+import sys
+t = int(sys.stdin.readline())
+for _ in range(t):
+    m, n, x, y = map(int, sys.stdin.readline().split())
+    flg = True
+    k = x if m > n else y
+    while k <= m*n :
+        if k % n == y % n:
+            print(k)
+            flg = False
+            break
+        k += m
+    if flg : print(-1)
+```
+note : 
+* 발상의 전환이 필요한 문제.
+* 중국인의 나머지 정리를 어떻게 적용시켜봐야 할 지는 생각해볼 것.
+
+***
+
+### 9375. 패션왕 신해빈
+
+problem : https://www.acmicpc.net/problem/9375
+
+status : **solved**
+
+code :
+* non dictionary ver.
+```
+import sys
+for _ in range(int(sys.stdin.readline())):
+    dic = []
+    for _ in range(int(sys.stdin.readline())):
+        m, n = sys.stdin.readline().split()
+        if not dic :
+            dic.append([1, n])
+        else :
+            flg = True
+            for i in dic:
+                if i[1] == n :
+                    flg = False
+                    i[0] += 1
+                    break
+            if flg :
+                dic.append([1, n])
+    if not dic : print(0)
+    else :
+        ans = 1
+        for i in dic: ans *= i[0]+1
+        print(ans - 1)
+```
+* dictionary ver.
+```
+import sys
+for _ in range(int(sys.stdin.readline())):
+    dic = {}
+    for _ in range(int(sys.stdin.readline())):
+        m, n = sys.stdin.readline().split()
+        if n in dic:
+            dic[n] += 1
+        else :
+            dic[n] = 1
+    if not dic : print(0)
+    else :
+        ans = 1
+        for i in dic.values(): ans *= i+1
+        print(ans - 1)
+```
+
+note :
+
