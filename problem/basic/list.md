@@ -1460,3 +1460,132 @@ for _ in range(int(sys.stdin.readline())):
 
 note :
 
+***
+
+### 9461. 파도반 수열
+
+problem : https://www.acmicpc.net/problem/9461
+
+status : **solved**
+
+code :
+```
+p = [0] * 100
+for i in range(100):
+    if i < 3 :
+        p[i] = 1
+    elif i < 5:
+        p[i] = 2
+    else :
+        p[i] = p[i-5] + p[i-1]
+
+for _ in range(int(input())):
+    print(p[int(input())-1])
+```
+
+note :
+
+***
+
+### 11047. 동전 0
+
+problem : https://www.acmicpc.net/problem/11047
+
+status : **solved**
+
+code:
+```
+n, k = map(int, input().split())
+lst = [int(input()) for _ in range(n)]
+cnt = 0
+for i in reversed(lst):
+    cnt += k // i
+    k %= i
+    if k == 0 : break
+print(cnt)
+```
+
+note : 
+
+***
+
+### 11286. 절댓값 힙
+
+problem : https://www.acmicpc.net/problem/11286
+
+status : **solved**
+
+code:
+```
+import sys
+import heapq
+q = []
+
+for _ in range(int(sys.stdin.readline())):
+    i = int(sys.stdin.readline())
+    if i != 0:
+        heapq.heappush(q, (abs(i), i))
+    else :
+        if not q :
+            print(0)
+        else :
+            j = heapq.heappop(q)
+            print(j[1])
+            while True:
+                if not q or q[0] != j[0] : break
+                print(heapq.heappop(q)[1])
+```
+
+note :
+* priority queue를 직접 구현해보는게 가장 실력향상에 도움이 될 듯.
+
+***
+
+### 11403. 경로 찾기
+
+problem : https://www.acmicpc.net/problem/11403
+
+status : **solved**
+
+code :
+```
+n = int(input())
+lst = [[x for x in map(int, input().split())] for _ in range(n)]
+
+for k in range(n):
+    for i in range(n):
+        for j in range(n):
+            if lst[i][j] > 0 : continue
+            if lst[i][k]*lst[k][j] > 0 : lst[i][j] = 1
+for i in lst :
+    print(*i, sep=' ')
+```
+
+note : 
+* 플로이드 와샬 알고리즘.
+
+***
+
+### 11659. 구간 합 구하기 4
+
+problem : https://www.acmicpc.net/problem/11659
+
+status : **solved**
+
+code :
+```
+import sys
+
+n, m = map(int, sys.stdin.readline().split())
+lst = list(map(int, sys.stdin.readline().split()))
+s_lst = [0] * n
+for i in range(n):
+    s_lst[i] = lst[i] if i == 0 else lst[i] + s_lst[i-1]
+ 
+for _ in range(m):
+    i, j = map(int, sys.stdin.readline().split())
+    print(s_lst[j-1] if i == 1 else s_lst[j-1] - s_lst[i-2])
+```
+
+note :
+* 간단한 누적합 문제.
