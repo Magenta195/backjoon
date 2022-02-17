@@ -1,7 +1,7 @@
 
 ###
 # 17219. 비밀번호 찾기
-# problem : https://www.acmicpc.net/problem/11727
+# problem : https://www.acmicpc.net/problem/17219
 # status : solved
 ###
 
