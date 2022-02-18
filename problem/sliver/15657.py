@@ -15,9 +15,6 @@ def dfs(d):
     return
   
   for i in range(d, n):
-    if len(s) > 0 :
-      if s[-1] > n_lst[i]:
-        continue
     s.append(n_lst[i])
     dfs(i)
     s.pop()
