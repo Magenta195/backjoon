@@ -1589,3 +1589,27 @@ for _ in range(m):
 
 note :
 * 간단한 누적합 문제.
+
+***
+
+### 11650. 좌표 정렬하기
+
+problem : https://www.acmicpc.net/problem/11650
+
+status : **solved**
+
+code :
+```
+import sys
+
+n = int(sys.stdin.readline())
+lst = [[x for x in map(int, sys.stdin.readline().split())] for _ in range(n)]
+lst.sort(key = lambda x:(x[0], x[1]))
+
+for l in lst:
+    print(*l)
+```
+
+note :
+
+***
