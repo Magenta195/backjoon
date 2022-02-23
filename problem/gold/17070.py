@@ -4,7 +4,7 @@
 # status : not solved
 ###
 
-### trial 1
+### trial 1 (BFS)
 
 dx = [1, 1, 0]
 dy = [0, 1, 1]
@@ -31,3 +31,24 @@ while q:
       elif i == 1 and lst[ay][ax] == 0 and lst[y][ax] == 0 and lst[ay][x] == 0 :
         q.append((ax, ay, 1))
 print(s)
+
+### trial 2 (DP)
+
+n = int(input())
+lst = [list(map(int, input().split())) for _ in range(n)]
+dp = [[[0]*3 for _ in range(n)] for _ in range(n)] # (y, x, d)
+dp[0][1][0] = 1
+
+for x in range(2, n):
+  if lst[0][x] == 0:
+    dp[0][x][0] = dp[0][x-1][0]
+
+for y in range(1, n):
+  for x in range(2, n):
+    if lst[y][x] == 0 and lst[y-1][x] == 0 and lst[y][x-1] == 0 :
+      dp[y][x][1] = sum(dp[y][x])
+    if lst[y][x] == 0:
+      dp[y][x][0] = sum(dp[y][x-1][:2])
+      dp[y][x][2] = sum(dp[y-1][x][1:])
+print(sum(dp[n-1][n-1]))
+      
