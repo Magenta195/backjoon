@@ -1,7 +1,7 @@
 ###
 # 17070.파이프 옮기기 1
 # problem : https://www.acmicpc.net/problem/17070
-# status : not solved
+# status : solved
 ###
 
 ### trial 1 (BFS)
@@ -46,7 +46,7 @@ for x in range(2, n):
 for y in range(1, n):
   for x in range(2, n):
     if lst[y][x] == 0 and lst[y-1][x] == 0 and lst[y][x-1] == 0 :
-      dp[y][x][1] = sum(dp[y][x])
+      dp[y][x][1] = sum(dp[y-1][x-1])
     if lst[y][x] == 0:
       dp[y][x][0] = sum(dp[y][x-1][:2])
       dp[y][x][2] = sum(dp[y-1][x][1:])
