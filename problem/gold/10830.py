@@ -3,7 +3,6 @@
 # problem : https://www.acmicpc.net/problem/10830
 # status : solved
 ###
-
 a, b = map(int, input().split())
 m = [list(map(int, input().split())) for _ in range(a)]
 
@@ -18,6 +17,9 @@ def matmul(mat1, mat2) :
     
 def matpow(mat, n): 
   if n == 1 :
+    for i in range(a):
+      for j in range(a):
+        mat[i][j] %= 1000
     return mat
   
   pow = matpow(mat, n//2)
