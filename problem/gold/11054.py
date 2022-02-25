@@ -6,10 +6,10 @@
 n = int(input())
 lst = map(int, input().split())
 c_order = [0]*n
-r_order = [0]*n
+d_order = [0]*n
 
 c_order[0]=1
-r_order[-1]=1
+d_order[-1]=1
 for i in range(n):
   for j in range(i-1):
     if lst[i] > lst[j]:
@@ -20,4 +20,3 @@ for i in range(n):
   d_order[n-i-1] += 1
 
 print(max([x+y-1 for x, y in zip(c_order, d_order)]))
-
