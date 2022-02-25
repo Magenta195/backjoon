@@ -4,7 +4,7 @@
 # status : solved
 ###
 n = int(input())
-lst = map(int, input().split())
+lst = list(map(int, input().split()))
 c_order = [0]*n
 d_order = [0]*n
 
