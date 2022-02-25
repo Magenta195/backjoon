@@ -11,11 +11,11 @@ d_order = [0]*n
 c_order[0]=1
 d_order[-1]=1
 for i in range(n):
-  for j in range(i-1):
+  for j in range(i):
     if lst[i] > lst[j]:
       c_order[i] = max(c_order[i], c_order[j])
     if lst[n-i-1] > lst[n-j-1]:
-      d_order[n-i-1] = max(d_order[n-i-1], d_order[n-j-1])³
+      d_order[n-i-1] = max(d_order[n-i-1], d_order[n-j-1])
   c_order[i] += 1
   d_order[n-i-1] += 1
 
