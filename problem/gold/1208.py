@@ -1,6 +1,6 @@
 ###
-# 1202. 보석 도둑
-# problem : https://www.acmicpc.net/problem/1202
+# 1208. 보석 도둑
+# problem : https://www.acmicpc.net/problem/1208
 # status :
 ###
 import sys
@@ -11,10 +11,10 @@ lst = list(map(int, input().split()))
 m = n//2
 
 r_lst, l_lst = [], []
-for i in range(m):
+for i in range(m+1):
   for j in combinations(lst[:m], i):
     l_lst.append(sum(j))
-for i in range(n-m):
+for i in range(n-m+1):
   for j in combinations(lst[m:], i):
     r_lst.append(sum(j))
 
