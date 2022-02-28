@@ -1,5 +1,5 @@
 ###
-# 1208. 보석 도둑
+# 1208. 부분수열의 합 2
 # problem : https://www.acmicpc.net/problem/1208
 # status :
 ###
