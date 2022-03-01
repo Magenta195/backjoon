@@ -1,7 +1,7 @@
 ###
 # 1509. 펠린드롬 분함
 # problem : https://www.acmicpc.net/problem/1509
-# status :
+# status : solved
 ###
 import sys
 sys.setrecursionlimit(3000)
