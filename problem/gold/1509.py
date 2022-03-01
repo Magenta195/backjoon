@@ -10,7 +10,8 @@ lst = input().strip()
 n = len(lst)
 dp = [1e10]*n
 pal_dp = [[0]*n for _ in range(n)]
-  
+ 
+# 주의! pal_dp check를 함수를 통해 재귀적으로 계산하면 타임 오버 가능!
 for i in range(n):
   pal_dp[i][i] = True
   if i < n-1:
