@@ -1,48 +1,60 @@
 ###
 # 16724. 피리 부는 사나이
 # problem : https://www.acmicpc.net/problem/16724
-# status : not solved
+# status : solved
 ###
-import sys
-input = sys.stdin.readline
-sys.setrecursionlimit(100)
+def union(nxt: tuple, cur: tuple):
+   nxt_root = find(nxt[0], nxt[1])
+   cur_root = find(cur[0], cur[1])
+   root[cur_root[0]][cur_root[1]] = nxt_root
+
+
+def find(i, j):
+   if (i, j) == root[i][j]:
+       return (i, j)
+   root[i][j] = find(root[i][j][0], root[i][j][1])
+   return root[i][j]
+
+
+def dfs(y, x):
+   visit[y][x] = 1
+   ny, nx = y, x
+   if board[y][x] == "U":
+       ny -= 1
+   elif board[y][x] == "D":
+       ny += 1
+   elif board[y][x] == "L":
+       nx -= 1
+   elif board[y][x] == "R":
+       nx += 1
+
+   next_root = find(ny, nx)
+   if next_root == (ny, nx) and board[ny][nx] != "S":
+       union((ny, nx), (y, x))
+       dfs(ny, nx)
+
+   else: 
+       if next_root == (y, x):
+           board[y][x] = "S"
+           global ans
+           ans += 1
+           return
+       else:
+           union((ny, nx), (y, x))
+           return
+
 
 n, m = map(int, input().split())
-lst = [input().strip() for _ in range(n)]
-parent = [[(x,y) for x in range(m)] for y in range(n)]
-v = [[False]*m for _ in range(n)]
-
+board = [[] for _ in range(n)]
+visit = [[0 for _ in range(m)] for _ in range(n)]
+root = [[(i, j) for j in range(m)] for i in range(n)]
 for i in range(n):
-  for j in range(m):
-    ch = lst[i][j]
-    if ch == 'U' : parent[i][j] = (j, i-1)
-    elif ch == 'D' : parent[i][j] = (j, i+1)
-    elif ch == 'R' : parent[i][j] = (j+1, i)
-    else : parent[i][j] = (j-1, i)
+   board[i] = list(input())
 
-print(parent)
-def find(x, y):
-  print(x,y)
-  print(parent[y][x])
-  v[x][y] = True
-  print(v)
-  if parent[y][x] == (x,y) :
-    return x, y
-  if v[parent[y][x][1]][parent[y][x][0]] :
-    parent[y][x] = (x,y)
-    return x, y
-    
-  px, py = find(parent[y][x][0], parent[y][x][1])
-  parent[y][x] = (px, py)
-  return px, py
-
-cnt = 0
+ans = 0
 for i in range(n):
-  for j in range(m):
-    if not v[i][j] :
-      print('check')
-      find(j,i)
-      cnt += 1
-print(cnt)
-  
-
+   for j in range(m):
+       if visit[i][j]:
+           continue
+       dfs(i, j)
+print(ans)
