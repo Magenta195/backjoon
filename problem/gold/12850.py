@@ -2,6 +2,8 @@
 # 12850. 본대 산책 2
 # problem : https://www.acmicpc.net/problem/12850
 # status : solved
+# 12849. 본대 산책도 같은 풀이로 풀 수 있음
+###
 
 init_mat = [
   [0, 1, 1, 0, 0, 0, 0, 0],
