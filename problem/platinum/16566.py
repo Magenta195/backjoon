@@ -1,7 +1,7 @@
 ###
 # 16566. 카드 게임
 # problem : https://www.acmicpc.net/problem/16566
-# status : 
+# status : solved
 ###
 import sys
 sys.setrecursionlimit(10000000)
