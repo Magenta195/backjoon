@@ -234,24 +234,8 @@ code :
 ```
 import sys
 
-def sort_func(lst) : ### quicksort
-    if len(lst) <= 1 : return lst
-
-    m = lst[0]
-    l_lst = list()
-    m_lst = list()
-    r_lst = list()
-    
-    for i in lst :
-      if i > m : r_lst.append(i)
-      elif i == m : m_lst.append(i)
-      else : l_lst.append(i)
-    
-    return sort_func(l_lst) + m_lst + sort_func(r_lst)
-
 n = int(sys.stdin.readline())
-n_card = [x for x in map(int, sys.stdin.readline().split())]
-n_card = sort_func(n_card)
+n_card = sorted([x for x in map(int, sys.stdin.readline().split())])
 n_dic = {}
 
 m = int(sys.stdin.readline())
