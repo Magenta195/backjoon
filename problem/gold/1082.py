@@ -38,3 +38,24 @@ ans = 0
 for i in range(M+1):
   ans = max(ans, dp[i][-1])
 print(ans)
+
+### trial 2
+import sys
+input = sys.stdin.readline
+
+N = int(input())
+P = list(map(int, input().split()))
+M = int(input())
+
+dp = [-1]*(M+1)
+    
+for i in range(N):
+  if P[i] <= M :
+    dp[P[i]] = i
+    
+for i in range(M):
+  for j in range(N):
+    if i + P[j] <= M :
+      dp[i+P[j]] = max(dp[i+P[j]], dp[i]*10 + j)
+
+print(max(dp))
