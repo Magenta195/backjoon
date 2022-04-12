@@ -1,7 +1,7 @@
 ###
 # 1029. 그림 교환
 # problem : https://www.acmicpc.net/problem/1029
-# status : not solved
+# status : solved
 ###
 
 import sys
