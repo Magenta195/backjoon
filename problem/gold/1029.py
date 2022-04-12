@@ -10,27 +10,23 @@ input = sys.stdin.readline
 MAX =  10
 N = int(input())
 lst = [list(input().strip()) for _ in range(N)]
-dp = [[-1]*N for _ in range(1<<N)]
-dp[1][0] = 0
+dp = [[[0]*(1<<N+1) for _ in range(N)] for _ in range(MAX)] ## cost, last node, visited
 
-for _ in range(N-1):
-  for i in range(N):
-    for j in range(1, 1<<N):
-      if dp[j][i] > -1: continue
-      dp[j][i] = MAX
-      for k in range(N):
-        if j & (1<<k) and -1 < dp[j - (1<<k)][k] <= int(lst[k][i]):
-          dp[j][i] = min(dp[j][i], int(lst[k][i]))
-      if dp[j][i] == MAX :
-        dp[j][i] = -1
+def one_count(st):
+  return bin(st).count('1')
 
-ans = 0
-print(dp)
-for i in range(N):
-  for j in range(1, 1<<N):
-    if dp[j][i] < 0 : continue    
-    ans = max(ans, bin(j).count('1'))
-print(ans)
-        
+def dfs(cost, last_node, visited):
+  if dp[cost][last_node][visited] > 0 :
+    return dp[cost][last_node][visited]
+
+  cnt = 1
+  for k in range(1, N):
+    if not visited & (1 << k) and int(lst[last_node][k]) >= cost:
+      cnt = max(cnt, 1 + dfs(int(lst[last_node][k]), k, visited | (1 << k)))
+  dp[cost][last_node][visited] = cnt
+  
+  return cnt
+
+print(dfs(0,0,1))
         
     
