@@ -1,5 +1,5 @@
 ###
-# 1131. 무한 수열
+# 1351. 무한 수열
 # problem : https://www.acmicpc.net/problem/1351
 # status : solved
 ###
