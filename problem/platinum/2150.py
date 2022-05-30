@@ -1,7 +1,7 @@
 ###
 # 2150. Stroingly Connectied Component
-# problem : 
-# status :
+# problem : https://www.acmicpc.net/problem/2150
+# status : solved
 # time : ???
 ###
 
