@@ -12,6 +12,8 @@ def dfs(x, visited):
     if lst[x][0]: return lst[x][0]
     return 1e10
 
+  if dp[x][visited] == -1 :
+    return 1e10
   if dp[x][visited] != 1e10:  
     return dp[x][visited]
 
@@ -19,6 +21,9 @@ def dfs(x, visited):
     if not lst[x][i] or visited & (1 << i):
         continue
     dp[x][visited] = min(dp[x][visited], dfs(i, visited | (1 << i)) + lst[x][i])
+  if dp[x][visited] == 1e10 :
+    dp[x][visited] = -1
+    return 1e10
   return dp[x][visited]
 
 print(dfs(0, 1))
